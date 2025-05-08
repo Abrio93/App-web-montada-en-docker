@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"  # Puerto 8080 en tu máquina local mapeado al puerto 80 del contenedor
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/  # Mapea la carpeta html a la raíz de Apache en el contenedor
+    container_name: Sigila_PHP_8.1
+
+  mysql:
+    image: mysql:5.7  # Usa la imagen oficial de MySQL 5.7 (puedes usar otra versión si prefieres)
+    restart: always  # Reinicia el contenedor automáticamente si se detiene
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Cambia esta contraseña por una segura
+      MYSQL_DATABASE: adminlte             # Nombre de la base de datos
+      MYSQL_USER: ismael               # Usuario de la base de datos
+      MYSQL_PASSWORD: ismael       # Contraseña del usuario
+    volumes:
+      - db_data:/var/lib/mysql  # Mapea el volumen para la persistencia de datos
+
+volumes:
+  db_data:  # Define el volumen para la persistencia de la base de datos
