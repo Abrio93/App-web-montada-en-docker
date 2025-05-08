@@ -10,7 +10,7 @@ RUN apt-get update && \
 # Instalar extensiones adicionales de PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Habilitar el módulo de reescritura de Apache para .htaccess y URLs amigables
+# Habilitar el módulo de reescritura de Apache para .htaccess y URLs amigables (de momento parace que no funciona)
 RUN a2enmod rewrite
 
 # Copiar el contenido de tu carpeta html dentro del contenedor
@@ -19,6 +19,9 @@ COPY ./html /var/www/html/
 
 # Configuración de permisos opcional para la carpeta HTML
 RUN chown -R www-data:www-data /var/www/html
+
+# Configurar Apache para permitir .htaccess (de momento no funciona)
+RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # Exponer el puerto 80 (el predeterminado de Apache)
 EXPOSE 80
