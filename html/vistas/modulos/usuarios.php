@@ -28,7 +28,6 @@
             <th class="text-center">Perfil</th>
             <th class="text-center">Estado</th>
             <th class="text-center">Acciones</th>
-            <th class="text-center">Prueba</th>
           </tr>
         </thead>
         <tbody>
