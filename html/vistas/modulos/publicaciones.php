@@ -21,43 +21,36 @@
           <tr>
             <th class="text-center" style="width: 1%;">Nº</th>
             <th class="text-center" style="width: 1%;">Id</th>
-            <th class="text-center">Imagen</th>
-            <th class="text-center">Nombre</th>
             <th class="text-center">Usuario</th>
-            <th class="text-center">Correo</th>
-            <th class="text-center">Perfil</th>
-            <th class="text-center">Estado</th>
+            <th class="text-center">Texto</th>
+            <th class="text-center">Privacidad</th>
+            <th class="text-center">Nº de me gusta</th>
+            <th class="text-center">Nº de comentarios</th>
             <th class="text-center">Fecha creación</th>
+            <th class="text-center">Fecha edición</th>
+            <th class="text-center">Fecha eliminación</th>
             <th class="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <?php
 
-          $campo = null;
-          $valor = null;
+          $objetoPublicaciones = new ControladorPublicaciones();
+          $publicaciones = $objetoPublicaciones->ctrMostrarPublicaciones();
 
-          $objetoUsuarios = new ControladorUsuarios();
-          $usuarios = $objetoUsuarios->ctrMostrarUsuarios($campo, $valor);
-
-          foreach ($usuarios as $clave => $valor) {
+          foreach ($publicaciones as $clave => $valor) {
           ?>
             <tr class="text-center">
               <td class="text-center align-middle pt-3"><?php echo $clave + 1 ?></td>
               <td class="text-center align-middle pt-3"><?php echo $valor["id"] ?></td>
-              <td class="text-center align-middle pt-3">
-                <img width="40" class="img-fluid rounded-circle d-block mx-auto zoom btnVerUsuario" idUsuario="<?php echo $valor["id"]; ?>" src="<?php echo (!empty($valor["imagen"])) ? $valor["imagen"] : "vistas/img/usuarios/default/anonymous.png" ?>" title="Ver datos" data-bs-toggle="modal" data-bs-target="#modalVerUsuario">
-              </td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["nombre"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["usuario"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["correo"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["perfil"]; ?></td>
-              <?php if ($valor["baneado"] == 0) { ?>
-                <td><button class="text-center align-middle mt-1 btn btn-success btn-xs btnTablaActivar btnTablaEstado<?php echo $valor["id"]; ?>" estadoUsuario="1" idUsuario="<?php echo $valor["id"]; ?>">Activado</button></td>
-              <?php } else { ?>
-                <td><button class="text-center align-middle mt-1 btn btn-danger btn-xs btnTablaActivar btnTablaEstado<?php echo $valor["id"]; ?>" estadoUsuario="0" idUsuario="<?php echo $valor["id"]; ?>">Desactivado</button></td>
-              <?php } ?>
-              <td class="text-center align-middle pt-3"><?php echo $objetoUsuarios->ctrFormatearFecha($valor["creado_en"]); ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["usuario_id"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["texto"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["privacidad"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["numero_megusta"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["numero_comentarios"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["creado_en"]); ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["actualizado_en"]); ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["borrado_en"]); ?></td>
               <td>
                 <div class="text-center align-middle btn-group">
                   <button type="button" class="text-center align-middle mt-1 btn btn-primary btnVerUsuario" title="Ver" idUsuario="<?php echo $valor["id"]; ?>" data-bs-toggle="modal" data-bs-target="#modalVerUsuario">
@@ -66,10 +59,11 @@
                   <button class="text-center align-middle mt-1 btn btn-warning btnEditarUsuario" title="Editar" idUsuario="<?php echo $valor["id"]; ?>" data-bs-toggle="modal" data-bs-target="#modalEditarUsuario">
                     <i class="text-center align-middle bi bi-pencil-fill"></i>
                   </button>
-                  <button class="text-center align-middle mt-1 btn btn-danger btnEliminarUsuario" title="Eliminar" idUsuario="<?php echo $valor["id"]; ?>" imagenUsuario="<?php echo $valor["imagen"]; ?>" usuario="<?php echo $valor["usuario"]; ?>">
+                  <button class="text-center align-middle mt-1 btn btn-danger btnEliminarUsuario" title="Eliminar" idUsuario="<?php echo $valor["id"]; ?>" imagenUsuario="<?php echo $valor["id"]; ?>" usuario="<?php echo $valor["usuario_id"]; ?>">
                     <i class="text-center align-middle bi bi-trash-fill"></i>
                   </button>
                 </div>
+              </td>
               </td>
             </tr>
           <?php
