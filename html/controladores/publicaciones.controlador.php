@@ -1,6 +1,6 @@
 <?php
 
-class ControladorUsuarios
+class ControladorPublicaciones
 {
 
     //? INGRESO DE USUARIO (LOGIN)
