@@ -6,7 +6,7 @@ class ControladorUsuarios
     //? INGRESO DE USUARIO (LOGIN)
     public function ctrLogin()
     {
-echo "ola";
+
         if (isset($_POST["correo"])) {
 
             if (preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST["correo"])) {
