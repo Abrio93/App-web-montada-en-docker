@@ -6,36 +6,38 @@
           <tr>
             <th class="text-center" style="width: 1%;">Nº</th>
             <th class="text-center" style="width: 1%;">Id</th>
+            <th class="text-center">Publicación</th>
             <th class="text-center">Usuario</th>
-            <th class="text-center">Texto</th>
-            <th class="text-center">Privacidad</th>
-            <th class="text-center">Me gusta</th>
-            <th class="text-center">Comentarios</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Ubicación</th>
+            <th class="text-center">Formato</th>
+            <th class="text-center">Ancho</th>
+            <th class="text-center">Alto</th>
+            <th class="text-center">Foto principal</th>
             <th class="text-center">Fecha creación</th>
-            <th class="text-center">Fecha edición</th>
-            <th class="text-center">Fecha eliminación</th>
             <th class="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <?php
 
-          $objetoPublicaciones = new ControladorPublicaciones();
-          $publicaciones = $objetoPublicaciones->ctrMostrarPublicaciones();
+          $objetoFotos = new ControladorFotos();
+          $publicaciones = $objetoFotos->ctrMostrarFotos();
 
           foreach ($publicaciones as $clave => $valor) {
           ?>
             <tr class="text-center">
               <td class="text-center align-middle pt-3"><?php echo $clave + 1 ?></td>
               <td class="text-center align-middle pt-3"><?php echo $valor["id"] ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["publicacion_id"]; ?></td>
               <td class="text-center align-middle pt-3"><?php echo ControladorUsuarios::ctrBuscarUsuarioPorId($valor["usuario_id"]); ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["texto"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["privacidad"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["numero_megusta"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $valor["numero_comentarios"]; ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["creado_en"]); ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["actualizado_en"]); ?></td>
-              <td class="text-center align-middle pt-3"><?php echo $objetoPublicaciones->ctrFormatearFecha($valor["borrado_en"]); ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["nombre_original"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["ruta"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["tipo_mime"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["ancho"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["alto"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $valor["es_principal"]; ?></td>
+              <td class="text-center align-middle pt-3"><?php echo $objetoFotos->ctrFormatearFecha($valor["creado_en"]); ?></td>
               <td>
                 <div class="text-center align-middle btn-group">
                   <button type="button" class="text-center align-middle mt-1 btn btn-primary btnVerUsuario" title="Ver" idUsuario="<?php echo $valor["id"]; ?>" data-bs-toggle="modal" data-bs-target="#modalVerUsuario">

@@ -1,17 +1,17 @@
 <?php
 
-class ControladorPublicaciones
+class ControladorFotos
 {
 
-    //? SE UTILIZA PARA MOSTRAR LAS PUBLICACIONES EN LA TABLA DEL APARTADO PUBLICACIONES -> PUBLICACIONES DE LA WEB (publicaciones.php)
-    public function ctrMostrarPublicaciones()
+    //? SE UTILIZA PARA MOSTRAR LAS FOTOS EN LA TABLA DEL APARTADO FOTOS -> FOTOS DE LA WEB (fotos.php)
+    public function ctrMostrarFotos()
     {
-        $respuesta = ModeloPublicaciones::mdlMostrarPublicaciones();
+        $respuesta = ModeloFotos::mdlMostrarFotos();
 
         return $respuesta;
     }
 
-    //? SE UTILIZA PARA FORMATEAR LA FECHA QUE VIENE DE LA BASE DE DATOS Y MOSTRARLA EN EL FORMATO dd/mm/yyyy hh:mm:ss la llamada se hace en publicaciones.php
+    //? SE UTILIZA PARA FORMATEAR LA FECHA QUE VIENE DE LA BASE DE DATOS Y MOSTRARLA EN EL FORMATO dd/mm/yyyy hh:mm:ss la llamada se hace en fotos.php
     public function ctrFormatearFecha($fecha)
     {
 
@@ -25,4 +25,6 @@ class ControladorPublicaciones
 
         return $respuesta;
     }
+
+
 }

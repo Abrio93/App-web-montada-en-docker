@@ -34,6 +34,21 @@ class ModeloUsuarios
         $sentencia = null;
     }
 
+    static public function mdlBuscarUsuarioPorId($id)
+    {
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare("SELECT usuario FROM usuarios WHERE id = :id");
+
+        $sentencia->bindParam(":id", $id, PDO::PARAM_INT);
+
+        $sentencia->execute();
+
+        return $sentencia->fetch();
+
+        $sentencia->close();
+        $sentencia = null;
+    }
+
     //? ALTA DE USUARIOS
     static public function mdlIngresarUsuario($tabla, $datos)
     {

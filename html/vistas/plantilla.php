@@ -27,6 +27,7 @@ session_start();
                 $_GET['ruta'] == 'inicio' ||
                 $_GET['ruta'] == 'usuarios' ||
                 $_GET['ruta'] == 'publicaciones' ||
+                $_GET['ruta'] == 'fotos' ||
                 $_GET['ruta'] == 'salir'
             ) {
                 include('modulos/' . $_GET['ruta'] . '.php');

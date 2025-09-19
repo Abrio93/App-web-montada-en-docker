@@ -18,6 +18,11 @@
                         <p>Publicaciones</p>
                     </a>
                 </li>
+                <li class="nav-item <?php echo ($_GET["ruta"] == "fotos")? "menu-open":""; ?>">
+                    <a href="index.php?ruta=fotos" class="nav-link"> <i class="bi bi-images"></i>
+                        <p>Fotos</p>
+                    </a>
+                </li>
             </ul> <!--end::Sidebar Menu-->
         </nav>
     </div> <!--end::Sidebar Wrapper-->

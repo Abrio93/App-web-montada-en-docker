@@ -62,6 +62,14 @@ class ControladorUsuarios
         return $respuesta;
     }
 
+    //? SE UTILIZA PARA MOSTRAR EL NOMBRE DE USUARIO EN fotos.php y publicaciones.php
+    static public function ctrBuscarUsuarioPorId($id)
+    {
+        $respuesta = ModeloUsuarios::mdlBuscarUsuarioPorId($id);
+
+        return $respuesta['usuario'];
+    }
+
     //? SE UTILIZA PARA FORMATEAR LA FECHA QUE VIENE DE LA BASE DE DATOS Y MOSTRARLA EN EL FORMATO dd/mm/yyyy hh:mm:ss la llamada se hace en usuarios.php
     public function ctrFormatearFecha($fecha)
     {
@@ -79,7 +87,7 @@ class ControladorUsuarios
 
         $ruta = "vistas/img/usuarios/default/anonymous.png";
 
-        for ($i = 0; $i < $numeroUsuarios = 100; $i++) {
+        for ($i = 0; $i < $numeroUsuarios = 10; $i++) {
 
             list($nombre, $usuario, $correo, $perfil) = $this->ctrGenerarAleatorio();
 
