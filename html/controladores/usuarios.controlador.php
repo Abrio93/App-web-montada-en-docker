@@ -24,7 +24,7 @@ class ControladorUsuarios
                     $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $campo, $valor);
 
                     //? Por si queremos visualizar el nombre que recibimos o el array completo
-                    // var_dump($respuesta['nombre']);
+                    var_dump($respuesta['nombre']);
 
                     if (@$respuesta["correo"] == $_POST["correo"]) {
                         if ($respuesta["baneado"] == 0) {

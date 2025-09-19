@@ -17,8 +17,8 @@
             </div> <!-- /.col -->
           </div> <!--end::Row-->
           <?php
-          $login = new ControladorUsuarios();
-          $login->ctrLogin();
+          $objetoUsuarios = new ControladorUsuarios();
+          $objetoUsuarios->ctrLogin();
           ?>
         </form>
         <center>
