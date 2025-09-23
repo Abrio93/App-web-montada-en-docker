@@ -1,7 +1,21 @@
+--? Tabla usuarios
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `usuario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `imagen` varchar(255) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'vistas/img/usuarios/default/anonymous.png',
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `perfil` varchar(30) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'Vendedor',
+  `baneado` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_correo` (`correo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
 
 
 
--- crear publicaciones
+--? crear publicaciones
 INSERT INTO publicaciones (usuario_id, texto, privacidad, numero_megusta, numero_comentarios, creado_en, actualizado_en, borrado_en) VALUES
 (6241, 'Mi primera publicación en esta red social.', 'publico', 5, 2, '2025-09-23 09:00:00', '2025-09-23 09:00:00', NULL),
 (6242, '¡Hola a todos! Emocionado de estar aquí.', 'amigos', 10, 4, '2025-09-23 09:05:00', '2025-09-23 09:05:00', NULL),
@@ -14,28 +28,28 @@ INSERT INTO publicaciones (usuario_id, texto, privacidad, numero_megusta, numero
 (6249, 'Descubriendo nuevas comunidades.', 'publico', 45, 18, '2025-09-23 09:40:00', '2025-09-23 09:40:00', NULL),
 (6250, 'Listo para conectar con gente nueva.', 'amigos', 50, 20, '2025-09-23 09:45:00', '2025-09-23 09:45:00', NULL);
 
--- crear fotos
+--? crear fotos
 INSERT INTO fotos (publicacion_id, usuario_id, nombre_original, ruta, tipo_mime, tamano, ancho, alto, es_principal, creado_en) VALUES
--- Publicación ID 5
+--todo Publicación ID 5
 (29, 6241, 'foto-cielo.jpg', '/uploads/fotos/5/foto1.jpg', 'image/jpeg', 150000, 1920, 1080, 1, NOW()),
 (29, 6241, 'foto-mar.png', '/uploads/fotos/5/foto2.png', 'image/png', 200000, 1280, 720, 0, NOW()),
 
--- Publicación ID 6
+--todo Publicación ID 6
 (30, 6242, 'foto-montana.jpg', '/uploads/fotos/6/foto1.jpg', 'image/jpeg', 300000, 1920, 1080, 1, NOW()),
 (30, 6242, 'foto-bosque.jpg', '/uploads/fotos/6/foto2.jpg', 'image/jpeg', 250000, 1920, 1080, 0, NOW()),
 (30, 6242, 'foto-rio.jpg', '/uploads/fotos/6/foto3.jpg', 'image/jpeg', 350000, 1920, 1080, 0, NOW()),
 
--- Publicación ID 7
+--todo Publicación ID 7
 (31, 6243, 'foto-ciudad.jpg', '/uploads/fotos/7/foto1.jpg', 'image/jpeg', 400000, 1920, 1080, 1, NOW()),
 (31, 6243, 'foto-noche.jpg', '/uploads/fotos/7/foto2.jpg', 'image/jpeg', 500000, 1920, 1080, 0, NOW()),
 
--- Publicación ID 8
+--todo Publicación ID 8
 (32, 6244, 'foto-animal.jpg', '/uploads/fotos/8/foto1.jpg', 'image/jpeg', 220000, 1920, 1080, 1, NOW()),
 (32, 6244, 'foto-mascota.jpg', '/uploads/fotos/8/foto2.jpg', 'image/jpeg', 180000, 1920, 1080, 0, NOW()),
 (32, 6244, 'foto-parque.jpg', '/uploads/fotos/8/foto3.jpg', 'image/jpeg', 280000, 1920, 1080, 0, NOW()),
 (32, 6244, 'foto-jardin.jpg', '/uploads/fotos/8/foto4.jpg', 'image/jpeg', 310000, 1920, 1080, 0, NOW()),
 
--- Publicación ID 9
+--todo Publicación ID 9
 (33, 6245, 'foto-evento.jpg', '/uploads/fotos/9/foto1.jpg', 'image/jpeg', 190000, 1920, 1080, 1, NOW()),
 (33, 6245, 'foto-viaje.jpg', '/uploads/fotos/9/foto2.jpg', 'image/jpeg', 240000, 1920, 1080, 0, NOW()),
 (33, 6245, 'foto-playa.jpg', '/uploads/fotos/9/foto3.jpg', 'image/jpeg', 280000, 1920, 1080, 0, NOW()),
