@@ -1,0 +1,16 @@
+
+/* para la imagen en la pagina de inicio */
+.img-redonda {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+/* para la imagen en la pagina de inicio */
+.img-borde-celeste {
+  border: 5px solid #E3F2FD;
+}
+
+/* para la card en la pagina de inicio */
+
