@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
 
-  <!-- Parte izquierda -->
+    <!-- Parte izquierda -->
     <div class="col-md-2 text-center d-flex justify-content-center">
       <div class="row">
         <div class="col-12 mt-5" style="margin-left: 15%;">
@@ -23,13 +23,13 @@
     <div class="col-md-10">
       <?php
       //? LLAMAMOS A LAS PUBLICACIONES
-      $publicaciones = new ControladorPublicaciones();
-      $publicaciones = $publicaciones->ctrMostrarPublicaciones();
+      $objetoPublicaciones = new ControladorPublicaciones();
+      $publicaciones = $objetoPublicaciones->ctrMostrarPublicaciones();
 
-      foreach ($publicaciones as $clave => $valor) {
-        $fotos = new ControladorFotos();
-        //? PASAMOS EL ID DE LA PUBLICACION PARA QUE NOS TRAIGA LAS FOTOS DE ESA PUBLICACION
-        $fotos = $fotos->ctrMostrarFotos($valor["id"]);
+      foreach ($publicaciones as $clave => $valorPublicacion) {
+        $objetoFotos = new ControladorFotos();
+        //? LLAMAMOS A LAS FOTOS DE CADA PUBLICACION
+        $fotos = $objetoFotos->ctrSacarFotosPorPublicacion($valorPublicacion["id"]);
 
       ?>
         <div class="row">
@@ -37,12 +37,18 @@
           <div class="col-md-10 my-5 text-center">
             <div class="card fondo-feed">
               <div class="d-flex justify-content-center pt-3">
-                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/af/33/14/el-mejor-bar-playero.jpg?w=900&h=500&s=1" class="card-img-top img-feed img-fluid px-2" alt="...">
+                <?php
+                foreach ($fotos as $clave => $valorFoto) {
+                ?>
+                  <img src="<?php echo $valorFoto["ruta"]; ?>" class="card-img-top img-feed img-fluid px-2" alt="...">
+                <?php
+                }
+                ?>
               </div>
               <div class="card-body text-start">
                 <div class="row mb-2">
                   <div class="col-12">
-                    <?php echo $valor["texto"]; ?>
+                    <?php echo $valorPublicacion["texto"]; ?>
                   </div>
                 </div>
                 <div class="row">

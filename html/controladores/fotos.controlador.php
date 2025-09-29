@@ -26,5 +26,12 @@ class ControladorFotos
         return $respuesta;
     }
 
+    public function ctrSacarFotosPorPublicacion($publicacion_id)
+    {
+        
+        $respuesta = ModeloFotos::mdlSacarFotosPorPublicacion($publicacion_id);
 
+        return $respuesta;
+
+    }
 }
