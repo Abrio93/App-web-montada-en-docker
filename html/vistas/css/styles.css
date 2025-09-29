@@ -1,4 +1,3 @@
-
 /* para la imagen en la pagina de inicio */
 .img-redonda {
   border-radius: 50%;
@@ -12,5 +11,24 @@
   border: 5px solid #E3F2FD;
 }
 
-/* para la card en la pagina de inicio */
+/* para las fotos en el feed de la pagina de inicio */
+.img-feed {
+  /* width: 700px; */
+  height: 500px;
+  border-radius: 2%;
+  object-fit: cover;
+}
 
+.fondo-feed {
+  background-color: #f6f6f6;
+  /* Efecto de sobresalido (transform: scale) */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Escalar la card para dar la ilusión de que sobresale */
+  transform: scale(1.05);
+  /* Sombra personalizada abajo y a la derecha */
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cursor {
+  cursor: pointer;
+}
