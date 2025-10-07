@@ -46,7 +46,10 @@ session_start();
     include('modulos/inicio.php');
     ?>
 
-    <body>
+</body>
+
+<!-- Scripts -->
+<script src="vistas/js/inicio.js"></script>
 
 </html>
 <?php

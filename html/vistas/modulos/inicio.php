@@ -53,8 +53,10 @@
                                     <div class="<?php echo $claseColumnaPrincipal; ?>">
                                         <img
                                             src="<?php echo $rutaPrimeraFoto; ?>"
-                                            class="img-fluid object-fit-cover rounded"
+                                            class="img-fluid object-fit-cover rounded foto-clickable"
                                             alt="Foto Principal"
+                                            data-publicacion="<?php echo $valorPublicacion['id']; ?>"
+                                            data-index="0"
                                             style="min-height: 250px; max-height: 400px;">
                                     </div>
 
@@ -68,15 +70,27 @@
 
                                                                         // Aquí usamos col-12 para que las miniaturas se apilen verticalmente
                                                                         // dentro de esta columna col-6
+                                                                        if ($i >= 9) {
+                                                                            if ($i == 10) {
+                                                                                $fotosRestantes = $cantidadFotos - 10;
+                                                                                echo '<div class="col-4 mb-1 position-relative">';
+                                                                                echo '<img src="' . $rutaFoto . '" class="img-fluid object-fit-cover w-100 rounded foto-clickable" alt="Foto Miniatura" data-publicacion="' . $valorPublicacion['id'] . '" data-index="' . $i . '" style="height: 120px; filter: brightness(50%);">';
+                                                                                echo '<div class="position-absolute top-50 start-50 translate-middle text-white fs-4 fw-bold">+' . $fotosRestantes . '</div>';
+                                                                                echo '</div>';
+                                                                            }
+                                                                        } else {
                                                                     ?>
-                                                    <div class="col-4 mb-1">
-                                                        <img
-                                                            src="<?php echo $rutaFoto; ?>"
-                                                            class="img-fluid object-fit-cover w-100 rounded"
-                                                            alt="Foto Miniatura"
-                                                            style="height: 120px;">
-                                                    </div>
+                                                        <div class="col-4 mb-1">
+                                                            <img
+                                                                src="<?php echo $rutaFoto; ?>"
+                                                                class="img-fluid object-fit-cover w-100 rounded foto-clickable"
+                                                                data-publicacion="<?php echo $valorPublicacion['id']; ?>"
+                                                                data-index="<?php echo $i; ?>"
+                                                                alt="Foto Miniatura"
+                                                                style="height: 120px;">
+                                                        </div>
                                                 <?php
+                                                                        }
                                                                     }
                                                 ?>
                                             </div>
@@ -111,4 +125,34 @@
             ?>
         </div>
     </div>
+</div>
+
+
+<!-- Modal para mostrar imagen en grande -->
+<!-- Modal para mostrar imagen en grande con navegación -->
+<div class="modal fade" id="visorImagen" tabindex="-1" aria-labelledby="visorImagenLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-body position-relative p-0 text-center">
+        <!-- Flecha anterior -->
+        <button type="button" id="btnPrev" class="position-absolute top-50 start-0 translate-middle-y btn btn-link p-3"
+                style="z-index: 1051;" aria-label="Anterior">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Imagen -->
+        <img id="imagenAmpliada" src="" class="img-fluid rounded" alt="Imagen ampliada" style="max-height: 80vh;">
+
+        <!-- Flecha siguiente -->
+        <button type="button" id="btnNext" class="position-absolute top-50 end-0 translate-middle-y btn btn-link p-3"
+                style="z-index: 1051;" aria-label="Siguiente">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
