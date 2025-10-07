@@ -1,5 +1,5 @@
 
-//? Para visualizar la imagen ampliada en un modal al hacer clic en una miniatura y hacer navegación entre imágenes de la misma publicación.
+//? Para visualizar la imagen ampliada en un modal al hacer clic en una miniatura
 
 document.addEventListener("DOMContentLoaded", function() {
   // Modal Bootstrap

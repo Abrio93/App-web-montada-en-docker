@@ -1,0 +1,62 @@
+/* Permitimos que el modal y sus contenedores no recorten elementos posicionados fuera */
+#visorImagen.modal,
+#visorImagen .modal-dialog {
+  overflow: visible !important;
+}
+
+/* Aseguramos que .modal-dialog sea reference para los absolutos */
+#visorImagen .modal-dialog {
+  position: relative; /* referencia para las flechas */
+}
+
+/* Imagen centrada dentro del modal */
+#visorImagen .modal-body {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#imagenAmpliada {
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* Estilos de flecha (botones) */
+.visor-flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  border: none;
+  color: white;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform .12s, background .12s, opacity .12s;
+  opacity: 0.95;
+  cursor: pointer;
+}
+
+/* hover */
+.visor-flecha:hover {
+  transform: translateY(-50%) scale(1.06);
+  background: rgba(0,0,0,0.75);
+}
+
+/* Las flechas quedan fuera del borde del modal-dialog (ajusta el -80px si quieres más separación) */
+#btnPrev {
+  left: -80px;
+}
+#btnNext {
+  right: -80px;
+}
+
+/* En pantallas pequeñas: ocultar flechas para usar swipe */
+@media (max-width: 767.98px) {
+  #btnPrev, #btnNext { display: none !important; }
+}
