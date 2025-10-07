@@ -60,3 +60,7 @@
 @media (max-width: 767.98px) {
   #btnPrev, #btnNext { display: none !important; }
 }
+
+.foto-clickable {
+  cursor: pointer;
+}

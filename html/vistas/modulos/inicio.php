@@ -62,44 +62,59 @@
 
                                     <?php if ($cantidadFotos > 1) { ?>
                                         <div class="col-6">
-                                            <div class="row g-1"> <?php
-                                                                    // Iteramos sobre las fotos a partir de la segunda (índice 1)
-                                                                    for ($i = 1; $i < $cantidadFotos; $i++) {
-                                                                        $valorFoto = $fotos[$i];
-                                                                        $rutaFoto = "dist/imagenes/" . $valorFoto["ruta"];
+                                            <div class="row g-1"> 
+                                            <?php
+                                                // Iteramos sobre las fotos a partir de la segunda (índice 1)
+                                                // El bucle DEBE ir hasta $cantidadFotos para que JS pueda rastrear TODAS.
+                                                for ($i = 1; $i < $cantidadFotos; $i++) {
+                                                    $valorFoto = $fotos[$i];
+                                                    $rutaFoto = "dist/imagenes/" . $valorFoto["ruta"];
 
-                                                                        // Aquí usamos col-12 para que las miniaturas se apilen verticalmente
-                                                                        // dentro de esta columna col-6
-                                                                        if ($i >= 9) {
-                                                                            if ($i == 10) {
-                                                                                $fotosRestantes = $cantidadFotos - 10;
-                                                                                echo '<div class="col-4 mb-1 position-relative">';
-                                                                                echo '<img src="' . $rutaFoto . '" class="img-fluid object-fit-cover w-100 rounded foto-clickable" alt="Foto Miniatura" data-publicacion="' . $valorPublicacion['id'] . '" data-index="' . $i . '" style="height: 120px; filter: brightness(50%);">';
-                                                                                echo '<div class="position-absolute top-50 start-50 translate-middle text-white fs-4 fw-bold">+' . $fotosRestantes . '</div>';
-                                                                                echo '</div>';
-                                                                            }
-                                                                        } else {
-                                                                    ?>
-                                                        <div class="col-4 mb-1">
-                                                            <img
-                                                                src="<?php echo $rutaFoto; ?>"
-                                                                class="img-fluid object-fit-cover w-100 rounded foto-clickable"
-                                                                data-publicacion="<?php echo $valorPublicacion['id']; ?>"
-                                                                data-index="<?php echo $i; ?>"
-                                                                alt="Foto Miniatura"
-                                                                style="height: 120px;">
-                                                        </div>
-                                                <?php
-                                                                        }
-                                                                    }
+                                                    // Lógica para mostrar la miniatura con el contador +X
+                                                    // Si estamos en la décima miniatura (índice 10) y hay más de 10 fotos EN TOTAL
+                                                    // (es decir, la foto 0 + 9 miniaturas + la foto del contador + el resto)
+                                                    if ($i == 9 && $cantidadFotos > 9) { 
+                                                        $fotosRestantes = $cantidadFotos - 10; // Fotos del índice 10 en adelante son $cantidadFotos - (1 (principal) + 9 (miniaturas))
+                                                        
+                                                        echo '<div class="col-4 mb-1 position-relative">';
+                                                        echo '<img 
+                                                            src="' . $rutaFoto . '" 
+                                                            class="img-fluid object-fit-cover w-100 rounded foto-clickable" 
+                                                            alt="Contador de Fotos" 
+                                                            data-publicacion="' . $valorPublicacion['id'] . '" 
+                                                            data-index="' . $i . '" 
+                                                            style="height: 120px; filter: brightness(50%); cursor: pointer;">';
+                                                        echo '<div class="position-absolute top-50 start-50 translate-middle text-white fs-4 fw-bold" style="pointer-events: none;">+' . $fotosRestantes . '</div>';
+                                                        echo '</div>';
+                                                        // No usamos `break;` aquí porque necesitamos que las fotos restantes se generen ocultas.
+                                                        
+                                                    } elseif ($i < 10) { 
+                                                        // Lógica para mostrar las 9 miniaturas normales (índices 1 a 9)
                                                 ?>
+                                                    <div class="col-4 mb-1">
+                                                        <img
+                                                            src="<?php echo $rutaFoto; ?>"
+                                                            class="img-fluid object-fit-cover w-100 rounded foto-clickable"
+                                                            data-publicacion="<?php echo $valorPublicacion['id']; ?>"
+                                                            data-index="<?php echo $i; ?>"
+                                                            alt="Foto Miniatura"
+                                                            style="height: 120px; cursor: pointer;">
+                                                    </div>
+                                                <?php
+                                                    } else { // Esto se ejecuta para $i > 10, o $i=10 si $cantidadFotos <= 10 (sin contador)
+                                                        // Generar la etiqueta como elemento oculto para que JS pueda encontrarla
+                                                        // pero no afecte el layout.
+                                                        echo '<div style="display: none;">';
+                                                        echo '<img src="' . $rutaFoto . '" class="foto-clickable" data-publicacion="' . $valorPublicacion['id'] . '" data-index="' . $i . '">';
+                                                        echo '</div>';
+                                                    }
+                                                } // Fin del for
+                                            ?>
                                             </div>
                                         </div>
                                     <?php } // Fin de if ($cantidadFotos > 1) 
+                                    } // Fin de if ($cantidadFotos > 0) 
                                     ?>
-                                <?php } // Fin de if ($cantidadFotos > 0) 
-                                ?>
-
                             </div>
 
                             <div class="card-body text-start">
@@ -131,28 +146,28 @@
 <!-- Modal para mostrar imagen en grande -->
 <!-- Modal para mostrar imagen en grande con navegación -->
 <div class="modal fade" id="visorImagen" tabindex="-1" aria-labelledby="visorImagenLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content bg-dark border-0">
-      <div class="modal-body position-relative p-0 text-center">
-        <!-- Flecha anterior -->
-        <button type="button" id="btnPrev" class="position-absolute top-50 start-0 translate-middle-y btn btn-link p-3"
-                style="z-index: 1051;" aria-label="Anterior">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-dark border-0">
+            <div class="modal-body position-relative p-0 text-center">
+                <!-- Flecha anterior -->
+                <button type="button" id="btnPrev" class="position-absolute top-50 start-0 translate-middle-y btn btn-link p-3"
+                    style="z-index: 1051;" aria-label="Anterior">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
 
-        <!-- Imagen -->
-        <img id="imagenAmpliada" src="" class="img-fluid rounded" alt="Imagen ampliada" style="max-height: 80vh;">
+                <!-- Imagen -->
+                <img id="imagenAmpliada" src="" class="img-fluid rounded" alt="Imagen ampliada" style="max-height: 80vh;">
 
-        <!-- Flecha siguiente -->
-        <button type="button" id="btnNext" class="position-absolute top-50 end-0 translate-middle-y btn btn-link p-3"
-                style="z-index: 1051;" aria-label="Siguiente">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
+                <!-- Flecha siguiente -->
+                <button type="button" id="btnNext" class="position-absolute top-50 end-0 translate-middle-y btn btn-link p-3"
+                    style="z-index: 1051;" aria-label="Siguiente">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
